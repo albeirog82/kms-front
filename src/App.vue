@@ -12,7 +12,7 @@
     </div>
     <div>
       <label for="fechaCreacion">¿En qué fecha se fundó su empresa o comenzó su emprendimiento?</label>
-      <input type="text" id="fechaCreacion" v-model="formValues.fechaCreacion" >      
+      <datepicker v-model="formValues.fechaCreacion" inputFormat="yyyy-MM-dd" format="yyyy-MM-dd" />     
     </div>
     <div>
       <label for="etapaDesarrollo">¿En cuál etapa de desarrollo se encuentra su emprendimiento?</label>
@@ -225,7 +225,7 @@
 
 <script>
 
-
+import Datepicker from 'vue3-datepicker'
 
 
 export default {
@@ -255,19 +255,20 @@ export default {
     }
   },
   components: {
-    
+    Datepicker
   }, 
   methods:{
     submitForm(event){
       event.preventDefault()
       console.log("form values", this.formValues)
+      console.log(this.formValues.fechaCreacion.toISOString())
       fetch('http://52.15.96.25:8080/v1/graphql',  {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: 'mutation MyMutation { \
                   insert_kms_registrations( \
                     objects: {company_name: "' +  this.formValues.nombreCompania + '",  \
-                        creation_date: "' + this.formValues.fechaCreacion + '", \
+                        creation_date: "' + this.formValues.fechaCreacion.toISOString() + '", \
                         development_stage: "' + this.formValues.etapaDesarrollo + '", \
                         sector: "' + this.formValues.sector + '", \
                         industry: "' + this.formValues.industria + '", \
@@ -326,7 +327,6 @@ label {
   color: #7568b1;
   margin-bottom: 5px;
 }
-
 input + label {
   font-weight: bold;
   display: inline-flex;
@@ -360,7 +360,7 @@ button {
   color:#fff;
   font-weight:600;
   border-radius:5px;
-  width:400px;
+
 
 }
 </style>
