@@ -1,10 +1,10 @@
 <template>
-  <pre>
-    {{ JSON.stringify(formValues, null, 2) }}
-  </pre>
  <form @submit="submitForm">
     <div>
-      <label for="datosGenerales">Datos Generales</label>
+      <h1 for="datosGenerales">CAPTURA DE DATOS PARA EMPRENDIMIENTO</h1>
+    </div>
+    <div>
+      <h2 for="datosGenerales">DATOS GENERALES</h2>
     </div>
     <div>
       <label for="nombreCompania">¿Cuál es el nombre de su emprendimiento/Compañía?</label>
@@ -12,11 +12,11 @@
     </div>
     <div>
       <label for="fechaCreacion">¿En qué fecha se fundó su empresa o comenzó su emprendimiento?</label>
-      <input type="text" id="fechaCreacion" >
+      <input type="text" id="fechaCreacion" v-model="formValues.fechaCreacion" >      
     </div>
     <div>
       <label for="etapaDesarrollo">¿En cuál etapa de desarrollo se encuentra su emprendimiento?</label>
-      <select id="etapaDesarrollo">
+      <select id="etapaDesarrollo" v-model="formValues.etapaDesarrollo" >
         <option value="">Seleccione una etapa</option>
         <option value="1">Etapa de Ideación</option>
         <option value="2">Etapa de Prototipado</option>
@@ -30,7 +30,7 @@
     </div>
     <div>
       <label for="sector">¿En cuál sector económico se desarrolla su negocio?</label>
-      <select id="sector">
+      <select id="sector" v-model="formValues.sector" >
         <option value="">Seleccione un sector</option>
         <option value="1">Agropecuario</option>
         <option value="2">Comercio</option>
@@ -43,7 +43,7 @@
     </div>    
     <div>
       <label for="industria">¿A qué industria pertenece su emprendimiento?</label>
-      <select id="industria">
+      <select id="industria" v-model="formValues.industria">
         <option value="">Seleccione una industria</option>
         <option value="1">AGRICULTURA VARIOS</option>
         <option value="2">AVÍCOLA</option>
@@ -108,11 +108,11 @@
       </select>
     </div>
     <div>
-      <label for="situacionPrevia">Situación previa</label>
+      <h2 for="situacionPrevia">SITUACIÓN PREVIA</h2>
     </div>    
     <div>
       <label for="inversionPrevia">¿La Compañía ha levantado fondos de capital previamente?</label>
-      <select id="inversionPrevia">
+      <select id="inversionPrevia" v-model="formValues.inversionPrevia" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
@@ -121,18 +121,18 @@
     <div>
       <label for="alistamientoMercado">¿El Producto Mínimo Viable (MVP) está listo para ser lanzado al mercado? 
 (A niveles tecnológico y de propuesta de valor adecuados)</label>
-      <select id="alistamientoMercado">
+      <select id="alistamientoMercado" v-model="formValues.alistamientoMercado" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
       </select>
     </div> 
     <div>
-      <label for="experiencia">Experiencia</label>
+      <h2 for="experiencia">EXPERIENCIA</h2>
     </div> 
     <div>
       <label for="experienciaLaboral">Experiencia de los Emprendedores ¿Han trabajado en una gran corporación?</label>
-      <select id="experienciaLaboral">
+      <select id="experienciaLaboral" v-model="formValues.experienciaLaboral" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
@@ -140,7 +140,7 @@
     </div>  
     <div>
       <label for="experienciaEmprendedores">¿Han emprendido previamente?</label>
-      <select id="experienciaEmprendedores">
+      <select id="experienciaEmprendedores" v-model="formValues.experienciaEmprendedores" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
@@ -148,7 +148,7 @@
     </div>  
     <div>
       <label for="experienciaTema">¿Tienen experiencia en el tema  en el mercado o en la industria?</label>
-      <select id="experienciaTema">
+      <select id="experienciaTema" v-model="formValues.experienciaTema" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
@@ -156,7 +156,7 @@
     </div>  
     <div>
       <label for="tipoExperiencia">¿En qué tienen experiencia afin al emprendimiento?</label>
-      <select id="tipoExperiencia">
+      <select id="tipoExperiencia" v-model="formValues.tipoExperiencia" >
         <option value="">Seleccione</option>
         <option value="M">Mercado</option>
         <option value="S">Sector</option>
@@ -167,7 +167,7 @@
     </div>      
     <div>
       <label for="experienciaEquipo">¿Tienen experiencia en el tema  en el mercado o en la industria?</label>
-      <select id="experienciaEquipo">
+      <select id="experienciaEquipo" v-model="formValues.experienciaEquipo" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
@@ -175,47 +175,50 @@
     </div> 
     <div>
       <label for="experienciaEcosistema">¿Han participado en aceleradoras, incubadoras, o en espacios de coworking? </label>
-      <select id="experienciaEcosistema">
+      <select id="experienciaEcosistema" v-model="formValues.experienciaEcosistema" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
       </select>
     </div> 
     <div>
-      <label for="capacidadGestion">Capacidad de Gestion</label>
+      <h2 for="capacidadGestion">CAPACIDAD DE GESTIÓN</h2>
     </div> 
     <div>
       <label for="existeEquipoGestor">¿Ya existe un equipo gestor?</label>
-      <select id="existeEquipoGestor">
+      <select id="existeEquipoGestor" v-model="formValues.existeEquipoGestor" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
       </select>
     </div> 
     <div>
-      <label for="fundadoresInvolucrados">Fundadores Involucrados</label>
+      <h2 for="fundadoresInvolucrados">FUNDADORES INVOLUCRADOS</h2>
     </div>     
     <div>
       <label for="numeroMiembros">Número de Miembros del equipo trabajando tiempo completo en el emprendimiento</label>
-      <input type="text" id="numeroMiembros" >
+      <input type="text" id="numeroMiembros" v-model="formValues.numeroMiembros" >
     </div>
     <div>
       <label for="participacionFundadores">Participación Fundadores</label>
     </div>
     <div>
       <label for="paquetesAccionarios">¿Tienen planeado otorgar paquetes accionarios para los miembros del equipo clave? </label>
-      <select id="paquetesAccionarios">
+      <select id="paquetesAccionarios" v-model="formValues.paquetesAccionarios">
         <option value="">Seleccione</option>
         <option value="1">SI</option>
         <option value="2">NO</option>
       </select>
     </div>
     <div>
-      <label for="numeroMiembrosConPaquetes">Número de Miembros del equipo trabajando tiempo completo en el emprendimiento</label>
-      <input type="text" id="numeroMiembrosConPaquetes" >
+      <label for="numeroMiembrosConPaquetes">Número de Miembros del equipo con paquetes accionarios</label>
+      <input type="text" id="numeroMiembrosConPaquetes" v-model="formValues.numeroMiembrosConPaquetes" >
     </div>
     <div>
       <button>Enviar</button>
+    </div>  
+    <div>
+      {{ this.formValues.respuestaRegistro }}
     </div>     
  </form>
 </template>
@@ -223,12 +226,31 @@
 <script>
 
 
+
+
 export default {
   name: 'App',
   data(){
     return{
         formValues:{
-          nombreCompania: ''
+          nombreCompania: '', 
+          fechaCreacion: '', 
+          etapaDesarrollo: '', 
+          sector: '', 
+          industria: '', 
+          inversionPrevia: '', 
+          alistamientoMercado: '', 
+          experienciaLaboral: '',
+          experienciaEmprendedores: '', 
+          experienciaTema: '', 
+          tipoExperiencia: '', 
+          experienciaEquipo: '', 
+          experienciaEcosistema: '', 
+          existeEquipoGestor: '', 
+          numeroMiembros: '', 
+          paquetesAccionarios: '', 
+          numeroMiembrosConPaquetes: '', 
+          respuestaRegistro: ''
         }
     }
   },
@@ -239,6 +261,36 @@ export default {
     submitForm(event){
       event.preventDefault()
       console.log("form values", this.formValues)
+      fetch('http://52.15.96.25:8080/v1/graphql',  {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: 'mutation MyMutation { \
+                  insert_kms_registrations( \
+                    objects: {company_name: "' +  this.formValues.nombreCompania + '",  \
+                        creation_date: "' + this.formValues.fechaCreacion + '", \
+                        development_stage: "' + this.formValues.etapaDesarrollo + '", \
+                        sector: "' + this.formValues.sector + '", \
+                        industry: "' + this.formValues.industria + '", \
+                        previous_investment: "' + this.formValues.inversionPrevia + '", \
+                        market_enlistment: "' + this.formValues.alistamientoMercado + '", \
+                        work_experience: "' + this.formValues.experienciaLaboral + '", \
+                        entrepreneurs_experience: "' + this.formValues.experienciaEmprendedores + '", \
+                        subject_experience: "' + this.formValues.experienciaTema + '", \
+                        experience_type: "' + this.formValues.tipoExperiencia + '", \
+                        experience_team: "' + this.formValues.experienciaEquipo + '", \
+                        ecosystem_experience : "' + this.formValues.experienciaEcosistema + '", \
+                        is_there_management_team  : "' + this.formValues.existeEquipoGestor  + '", \
+                        members_number: "' + this.formValues.numeroMiembros  + '", \
+                        stock_packages: "' + this.formValues.paquetesAccionarios  + '", \
+                        number_of_members_with_packages: "' + this.formValues.numeroMiembrosConPaquetes  + '", \
+                         }) { \
+                    returning {  \
+                      id   \
+                    }  \
+                  }   \
+                }' }),
+              })
+      this.formValues.respuestaRegistro = "Se hizo el registro satisfactoriamente"
     }
   },
 }
@@ -265,11 +317,16 @@ export default {
 .sold-out {
   color: red;
 }
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 label {
   font-weight: bold;
   display: flex;
+  color: #7568b1;
   margin-bottom: 5px;
 }
+
 input + label {
   font-weight: bold;
   display: inline-flex;
@@ -286,7 +343,24 @@ select {
   color: #555;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border:0; 
+  border-bottom:2px solid rgb(92, 103, 138); 
+  margin:10px 0;
+}
+button {
+
+  /* remove default behavior */
+  appearance:none;
+  -webkit-appearance:none;
+
+  /* usual styles */
+  padding:10px;
+  border:none;
+  background-color:#3F51B5;
+  color:#fff;
+  font-weight:600;
+  border-radius:5px;
+  width:400px;
+
 }
 </style>
