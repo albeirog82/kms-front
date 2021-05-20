@@ -164,7 +164,23 @@
         <option value="T">Tecnología</option>
         <option value="N">Ninguna</option>
       </select>
+    </div>
+    <label for="equipo">¿Cuál es la trayectoria del equipo emprendedor?</label>
+    <section>
+    <div v-for="miembro in formValues.equipo" :key="miembro.id">
+       <input type="text" v-model="miembro.nombre" placeholder="Nombre">
+       <input type="text" v-model="miembro.tiempo" placeholder="Tiempo en años">
+       <select id="trayectoria" v-model="miembro.trayectoria" >
+        <option value="">Trayectoria</option>
+        <option value="1">Laboral general</option>
+        <option value="2">Laboral relacionada</option>
+        <option value="3">Academica</option>
+       </select>
     </div>      
+    <button type="button" @click="AddField">
+      Agregar miembro
+    </button>
+    </section>
     <div>
       <label for="experienciaEquipo">¿Tienen experiencia en el tema  en el mercado o en la industria?</label>
       <select id="experienciaEquipo" v-model="formValues.experienciaEquipo" >
@@ -200,7 +216,7 @@
       <input type="text" id="numeroMiembros" v-model="formValues.numeroMiembros" >
     </div>
     <div>
-      <label for="participacionFundadores">Participación Fundadores</label>
+      <h2 for="participacionFundadores">PARTICIPACIÓN FUNDADORES</h2>
     </div>
     <div>
       <label for="paquetesAccionarios">¿Tienen planeado otorgar paquetes accionarios para los miembros del equipo clave? </label>
@@ -244,6 +260,7 @@ export default {
           experienciaEmprendedores: '', 
           experienciaTema: '', 
           tipoExperiencia: '', 
+          equipo: [{ nombre: '', tiempo: '', trayectoria: '' }], 
           experienciaEquipo: '', 
           experienciaEcosistema: '', 
           existeEquipoGestor: '', 
@@ -292,6 +309,9 @@ export default {
                 }' }),
               })
       this.formValues.respuestaRegistro = "Se hizo el registro satisfactoriamente"
+    }, 
+    AddField: function () {
+      this.formValues.equipo.push({ nombre: '', tiempo: '', trayectoria: '' });
     }
   },
 }
@@ -321,10 +341,15 @@ export default {
 *, *:before, *:after {
   box-sizing: border-box;
 }
-label {
+h2, h1 {
   font-weight: bold;
   display: flex;
-  color: #7568b1;
+  color: #3F51B5;
+  margin-bottom: 5px;
+}
+label {
+  display: flex;
+  color: #2678bb;
   margin-bottom: 5px;
 }
 input + label {
@@ -345,7 +370,7 @@ select {
   background-image: none;
   border:0; 
   border-bottom:2px solid rgb(92, 103, 138); 
-  margin:10px 0;
+  margin:9px 0;
 }
 button {
 
@@ -360,7 +385,7 @@ button {
   color:#fff;
   font-weight:600;
   border-radius:5px;
-
+  margin:10px 0;
 
 }
 </style>
