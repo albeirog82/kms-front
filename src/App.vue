@@ -168,9 +168,9 @@
     <label for="equipo">¿Cuál es la trayectoria del equipo emprendedor?</label>
     <section>
     <div v-for="miembro in formValues.equipo" :key="miembro.id">
-       <input type="text" v-model="miembro.nombre" placeholder="Nombre">
-       <input type="text" v-model="miembro.tiempo" placeholder="Tiempo en años">
-       <select id="trayectoria" v-model="miembro.trayectoria" >
+       <input type="text" v-model="miembro.name" placeholder="Nombre">
+       <input type="text" v-model="miembro.time" placeholder="Tiempo en años">
+       <select id="trayectoria" v-model="miembro.trajectory" >
         <option value="">Trayectoria</option>
         <option value="1">Laboral general</option>
         <option value="2">Laboral relacionada</option>
@@ -260,7 +260,7 @@ export default {
           experienciaEmprendedores: '', 
           experienciaTema: '', 
           tipoExperiencia: '', 
-          equipo: [{ nombre: '', tiempo: '', trayectoria: '' }], 
+          equipo: [{ name: '', time: '', trajectory: '' }], 
           experienciaEquipo: '', 
           experienciaEcosistema: '', 
           existeEquipoGestor: '', 
@@ -277,12 +277,7 @@ export default {
   methods:{
     submitForm(event){
       event.preventDefault()
-      console.log("form values", this.formValues)
-      console.log(this.formValues.fechaCreacion.toISOString())
-      fetch('http://52.15.96.25:8080/v1/graphql',  {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: 'mutation MyMutation { \
+      var query_perfil = 'mutation MyMutation { \
                   insert_kms_registrations( \
                     objects: {company_name: "' +  this.formValues.nombreCompania + '",  \
                         creation_date: "' + this.formValues.fechaCreacion.toISOString() + '", \
@@ -301,17 +296,27 @@ export default {
                         members_number: "' + this.formValues.numeroMiembros  + '", \
                         stock_packages: "' + this.formValues.paquetesAccionarios  + '", \
                         number_of_members_with_packages: "' + this.formValues.numeroMiembrosConPaquetes  + '", \
+                        registrations_teams: {   \
+                            data: ' + JSON.stringify(this.formValues.equipo).toString().
+                                replace(/"name"/g, "name").
+                                replace(/"time"/g, "time").
+                                replace(/"trajectory"/g, "trajectory") + ', \
+                          }    \
                          }) { \
                     returning {  \
                       id   \
                     }  \
                   }   \
-                }' }),
+                }'
+      fetch('http://52.15.96.25:8080/v1/graphql',  {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: query_perfil }),
               })
       this.formValues.respuestaRegistro = "Se hizo el registro satisfactoriamente"
     }, 
     AddField: function () {
-      this.formValues.equipo.push({ nombre: '', tiempo: '', trayectoria: '' });
+      this.formValues.equipo.push({ name: '', time: '', trajectory: '' });
     }
   },
 }
