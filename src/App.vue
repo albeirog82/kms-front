@@ -313,7 +313,20 @@ export default {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: query_perfil }),
               })
-      this.formValues.respuestaRegistro = "Se hizo el registro satisfactoriamente"
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.data.insert_kms_registrations.returning[0].id)
+                var companyId = data.data.insert_kms_registrations.returning[0].id
+                this.formValues.respuestaRegistro = "Se hizo el registro satisfactoriamente "
+                fetch('http://javaservice-env.eba-hjmbrbws.us-east-2.elasticbeanstalk.com/rules?id=' + companyId, {
+                  mode: 'no-cors'
+                })
+                .then(response => {
+                  response
+                  console.log("completado")
+                  this.formValues.respuestaRegistro = this.formValues.respuestaRegistro + "y se procesaron las reglas correctamente"
+                })
+            });
     }, 
     AddField: function () {
       this.formValues.equipo.push({ name: '', time: '', trajectory: '' });
