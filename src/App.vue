@@ -115,7 +115,7 @@
       <select id="inversionPrevia" v-model="formValues.inversionPrevia" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div>   
     <div>
@@ -124,7 +124,7 @@
       <select id="alistamientoMercado" v-model="formValues.alistamientoMercado" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div> 
     <div>
@@ -135,7 +135,7 @@
       <select id="experienciaLaboral" v-model="formValues.experienciaLaboral" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div>  
     <div>
@@ -143,7 +143,7 @@
       <select id="experienciaEmprendedores" v-model="formValues.experienciaEmprendedores" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div>  
     <div>
@@ -151,7 +151,7 @@
       <select id="experienciaTema" v-model="formValues.experienciaTema" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div>  
     <div>
@@ -186,7 +186,7 @@
       <select id="experienciaEquipo" v-model="formValues.experienciaEquipo" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div> 
     <div>
@@ -194,7 +194,7 @@
       <select id="experienciaEcosistema" v-model="formValues.experienciaEcosistema" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div> 
     <div>
@@ -205,7 +205,7 @@
       <select id="existeEquipoGestor" v-model="formValues.existeEquipoGestor" >
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div> 
     <div>
@@ -223,7 +223,7 @@
       <select id="paquetesAccionarios" v-model="formValues.paquetesAccionarios">
         <option value="">Seleccione</option>
         <option value="1">SI</option>
-        <option value="2">NO</option>
+        <option value="0">NO</option>
       </select>
     </div>
     <div>
